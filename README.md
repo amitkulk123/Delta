@@ -1,3 +1,26 @@
+This is my fork of Delta with a fix for Gambatte limitation. 
+
+The only change in this fork is that `Cores\GBCDeltaCore` points to my own [GBCDeltaCore](https://github.com/amitkulk123/GBCDeltaCore) that has a fix for `cartridge.cpp` in the way that it handles 128KiB memory.
+
+This matters because certain ROMs like lsdj require 128 KiB of memory otherwise it wouldn't show the load/save option.
+
+## Steps to Build 
+
+Clone this repo and checkout the `develop` branch using
+```
+git checkout develop
+```
+If needed, then update the .gitmodules file to fix the url for ssh.
+Then update the submodules:
+```
+git submodule update --init --recursive
+```
+If needed, you may need to include the remote option as well and in that case run:
+```
+git submodule update --init --recursive --remote
+```
+After updating the submodules, proceed to change the Xcode Bundle Identifier as usual in the steps below.
+
 # Delta
 
 > Delta is an all-in-one classic video game emulator for non-jailbroken iOS devices. 
