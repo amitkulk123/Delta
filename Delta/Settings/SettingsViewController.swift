@@ -8,8 +8,10 @@
 
 import UIKit
 import SafariServices
+import QuickLook
 
 import DeltaCore
+import Harmony
 
 import Roxas
 
@@ -43,6 +45,12 @@ private extension SettingsViewController
         case status
     }
     
+    enum AdvancedRow: Int, CaseIterable
+    {
+        case exportLog
+        case experimentalFeatures
+    }
+    
     enum CreditsRow: Int, CaseIterable
     {
         case riley
@@ -68,12 +76,15 @@ class SettingsViewController: UITableViewController
     @IBOutlet private var versionLabel: UILabel!
     
     @IBOutlet private var syncingServiceLabel: UILabel!
+    @IBOutlet private var exportLogActivityIndicatorView: UIActivityIndicatorView!
     
     private var selectionFeedbackGenerator: UISelectionFeedbackGenerator?
     
     private var previousSelectedRowIndexPath: IndexPath?
     
     private var syncingConflictsCount = 0
+    
+    private var _exportedLogURL: URL?
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -103,6 +114,11 @@ class SettingsViewController: UITableViewController
             #else
             self.versionLabel.text = NSLocalizedString("Delta", comment: "")
             #endif
+        }
+        
+        if #available(iOS 15, *)
+        {
+            self.tableView.register(AttributedHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: AttributedHeaderFooterView.reuseIdentifier)
         }
     }
     
@@ -196,6 +212,17 @@ private extension SettingsViewController
     {
         switch section
         {
+        case .hapticFeedback where !UIDevice.current.isVibrationSupported: return true
+            
+        case .advanced:
+            guard #unavailable(iOS 15) else { return false }
+            
+            #if BETA
+            return false
+            #else
+            return true
+            #endif
+            
         case .hapticTouch:
             if #available(iOS 13, *)
             {
@@ -294,6 +321,55 @@ private extension SettingsViewController
         let hostingController = ExperimentalFeaturesView.makeViewController()
         self.navigationController?.pushViewController(hostingController, animated: true)
     }
+    
+    @available(iOS 15, *)
+    func exportErrorLog()
+    {
+        self.exportLogActivityIndicatorView.startAnimating()
+        
+        if let indexPath = self.tableView.indexPathForSelectedRow
+        {
+            self.tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        Task<Void, Never>.detached(priority: .userInitiated) {
+            do
+            {
+                let store = try OSLogStore(scope: .currentProcessIdentifier)
+                
+                // All logs since the app launched.
+                let position = store.position(timeIntervalSinceLatestBoot: 0)
+                let predicate = NSPredicate(format: "subsystem IN %@", [Logger.deltaSubsystem, Logger.harmonySubsystem])
+                
+                let entries = try store.getEntries(at: position, matching: predicate)
+                    .compactMap { $0 as? OSLogEntryLog }
+                    .map { "[\($0.date.formatted())] [\($0.category)] [\($0.level.localizedName)] \($0.composedMessage)" }
+                
+                let outputText = entries.joined(separator: "\n")
+                                
+                let outputDirectory = FileManager.default.uniqueTemporaryURL()
+                try FileManager.default.createDirectory(at: outputDirectory, withIntermediateDirectories: true)
+                
+                let outputURL = outputDirectory.appendingPathComponent("delta.log")
+                try outputText.write(to: outputURL, atomically: true, encoding: .utf8)
+                
+                await MainActor.run {
+                    self._exportedLogURL = outputURL
+                    
+                    let previewController = QLPreviewController()
+                    previewController.delegate = self
+                    previewController.dataSource = self
+                    self.present(previewController, animated: true)
+                }
+            }
+            catch
+            {
+                print("Failed to export Harmony logs.", error)
+            }
+                        
+            await self.exportLogActivityIndicatorView.stopAnimating()
+        }
+    }
 }
 
 private extension SettingsViewController
@@ -341,6 +417,9 @@ extension SettingsViewController
         case .controllers: return 4
         case .controllerSkins: return System.registeredSystems.count
         case .syncing: return SyncManager.shared.coordinator?.account == nil ? 1 : super.tableView(tableView, numberOfRowsInSection: sectionIndex)
+        #if !BETA
+        case .advanced: return 1
+        #endif
         default:
             if isSectionHidden(section)
             {
@@ -363,7 +442,7 @@ extension SettingsViewController
         case .controllers:
             if indexPath.row == Settings.localControllerPlayerIndex
             {
-                cell.detailTextLabel?.text = UIDevice.current.name
+                cell.detailTextLabel?.text = LocalDeviceController().name
             }
             else if let index = ExternalGameControllerManager.shared.connectedControllers.firstIndex(where: { $0.playerIndex == indexPath.row })
             {
@@ -410,7 +489,17 @@ extension SettingsViewController
         case .controllerSkins: self.performSegue(withIdentifier: Segue.controllerSkins.rawValue, sender: cell)
         case .cores: self.performSegue(withIdentifier: Segue.dsSettings.rawValue, sender: cell)
         case .controllerOpacity, .gameAudio, .hapticFeedback, .hapticTouch, .syncing: break
-        case .advanced: self.showExperimentalFeatures()
+        case .advanced:
+            let row = AdvancedRow(rawValue: indexPath.row)!
+            switch row
+            {
+            case .exportLog:
+                guard #available(iOS 15, *) else { return }
+                self.exportErrorLog()
+                
+            case .experimentalFeatures: self.showExperimentalFeatures()
+            }
+
         case .patreon:
             let patreonURL = URL(string: "altstore://patreon")!
             
@@ -449,6 +538,17 @@ extension SettingsViewController
     primary:
         switch Section(rawValue: indexPath.section)!
         {
+        case .advanced:
+            let row = AdvancedRow(rawValue: indexPath.row)!
+            switch row
+            {
+            case .exportLog:
+                guard #unavailable(iOS 15) else { break }
+                return 0.0
+                
+            default: break
+            }
+            
         case .credits:
             let row = CreditsRow(rawValue: indexPath.row)!
             switch row
@@ -489,17 +589,45 @@ extension SettingsViewController
         }
     }
     
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? 
+    {
+        let section = Section(rawValue: section)!
+        guard !isSectionHidden(section) else { return nil }
+        
+        switch section
+        {
+        case .controllerSkins:
+            guard #available(iOS 15, *), let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: AttributedHeaderFooterView.reuseIdentifier) as? AttributedHeaderFooterView else { break }
+            
+            var attributedText = AttributedString(localized: "Customize the appearance of each system.")
+            attributedText += " "
+            
+            var learnMore = AttributedString(localized: "Learn more…")
+            learnMore.link = URL(string: "https://faq.deltaemulator.com/using-delta/controller-skins")
+            attributedText += learnMore
+            
+            footerView.attributedText = attributedText
+                        
+            return footerView
+            
+        default: break
+        }
+        
+        return super.tableView(tableView, viewForFooterInSection: section.rawValue)
+    }
+    
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String?
     {
         let section = Section(rawValue: section)!
+        guard !isSectionHidden(section) else { return nil }
         
-        if isSectionHidden(section)
+        switch section
         {
-            return nil
-        }
-        else
-        {
-            return super.tableView(tableView, titleForFooterInSection: section.rawValue)
+        #if !BETA
+        case .advanced: return nil
+        #endif
+        case .controllerSkins: return nil
+        default: return super.tableView(tableView, titleForFooterInSection: section.rawValue)
         }
     }
     
@@ -520,14 +648,47 @@ extension SettingsViewController
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
     {
         let section = Section(rawValue: section)!
+        guard !isSectionHidden(section) else { return 1 }
         
-        if isSectionHidden(section)
+        switch section
         {
-            return 1
+        case .controllerSkins: return UITableView.automaticDimension
+        default: return super.tableView(tableView, heightForFooterInSection: section.rawValue)
         }
-        else
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat 
+    {
+        let section = Section(rawValue: section)!
+        guard !isSectionHidden(section) else { return 1 }
+        
+        switch section
         {
-            return super.tableView(tableView, heightForFooterInSection: section.rawValue)
+        case .controllerSkins: return 30
+        default: return UITableView.automaticDimension
         }
+    }
+}
+
+extension SettingsViewController: QLPreviewControllerDataSource, QLPreviewControllerDelegate
+{
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int 
+    {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem 
+    {
+        return (_exportedLogURL as? NSURL) ?? NSURL()
+    }
+    
+    func previewControllerDidDismiss(_ controller: QLPreviewController) 
+    {
+        guard let exportedLogURL = _exportedLogURL else { return }
+        
+        let parentDirectory = exportedLogURL.deletingLastPathComponent()
+        try? FileManager.default.removeItem(at: parentDirectory)
+        
+        _exportedLogURL = nil
     }
 }

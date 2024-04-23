@@ -188,9 +188,12 @@
 		D54A4BB329E4D27E004C7D57 /* FeatureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54A4BB229E4D27E004C7D57 /* FeatureDetailView.swift */; };
 		D54F710229E89DCB009C069A /* SettingsUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54F710129E89DCB009C069A /* SettingsUserInfoKey.swift */; };
 		D54F710429E89DFC009C069A /* NotificationName+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54F710329E89DFC009C069A /* NotificationName+Settings.swift */; };
+		D55917D82B51CF7D007B7DC0 /* ProcessInfo+visionOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55917D72B51CF7D007B7DC0 /* ProcessInfo+visionOS.swift */; };
+		D55917DA2B51D097007B7DC0 /* LocalDeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55917D92B51D097007B7DC0 /* LocalDeviceController.swift */; };
 		D55C468F29E761C000EA6DE9 /* AnyFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C468E29E761C000EA6DE9 /* AnyFeature.swift */; };
 		D55C469129E7631000EA6DE9 /* AnyOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55C469029E7631000EA6DE9 /* AnyOption.swift */; };
 		D560BD8629EDC45600289847 /* ExternalDisplaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560BD8529EDC45600289847 /* ExternalDisplaySceneDelegate.swift */; };
+		D56F7ABC2B05988700490ACB /* AttributedHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56F7ABB2B05988700490ACB /* AttributedHeaderFooterView.swift */; };
 		D57D795629F300E100BB2CF8 /* CustomTintColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A817AF29DF4E6E00904AFE /* CustomTintColor.swift */; };
 		D57D795F29F315F700BB2CF8 /* FeatureDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54A4BB229E4D27E004C7D57 /* FeatureDetailView.swift */; };
 		D57D796029F315F700BB2CF8 /* ExperimentalFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A9C00229DDED6D00A8D610 /* ExperimentalFeaturesView.swift */; };
@@ -209,6 +212,7 @@
 		D5CDCCF12A859E7500E22131 /* ReviewSaveStatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A1375A2A7D8F2600AB1372 /* ReviewSaveStatesViewController.swift */; };
 		D5CDCCF22A859E7500E22131 /* RepairDatabaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A137442A7D814000AB1372 /* RepairDatabaseViewController.swift */; };
 		D5CDCCF32A859E7500E22131 /* GamePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A137662A7DB37200AB1372 /* GamePickerViewController.swift */; };
+		D5D39E792AF2D624004BE3F7 /* GameView+AirPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D39E782AF2D624004BE3F7 /* GameView+AirPlay.swift */; };
 		D5D78AE529F9BC3700E064F0 /* DSAirPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D78AE429F9BC3700E064F0 /* DSAirPlay.swift */; };
 		D5D78AE729F9D40A00E064F0 /* EnvironmentValues+FeatureOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D78AE629F9D40A00E064F0 /* EnvironmentValues+FeatureOption.swift */; };
 		D5D797E6298D946200738869 /* Contributor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D797E5298D946200738869 /* Contributor.swift */; };
@@ -460,9 +464,12 @@
 		D54F710129E89DCB009C069A /* SettingsUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUserInfoKey.swift; sourceTree = "<group>"; };
 		D54F710329E89DFC009C069A /* NotificationName+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Settings.swift"; sourceTree = "<group>"; };
 		D554C3822A58D89700E93359 /* Delta 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Delta 7.xcdatamodel"; sourceTree = "<group>"; };
+		D55917D72B51CF7D007B7DC0 /* ProcessInfo+visionOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+visionOS.swift"; sourceTree = "<group>"; };
+		D55917D92B51D097007B7DC0 /* LocalDeviceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDeviceController.swift; sourceTree = "<group>"; };
 		D55C468E29E761C000EA6DE9 /* AnyFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyFeature.swift; sourceTree = "<group>"; };
 		D55C469029E7631000EA6DE9 /* AnyOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyOption.swift; sourceTree = "<group>"; };
 		D560BD8529EDC45600289847 /* ExternalDisplaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalDisplaySceneDelegate.swift; sourceTree = "<group>"; };
+		D56F7ABB2B05988700490ACB /* AttributedHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedHeaderFooterView.swift; sourceTree = "<group>"; };
 		D586496F297734280081477E /* CheatMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatMetadata.swift; sourceTree = "<group>"; };
 		D586497129774ABD0081477E /* CheatBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatBase.swift; sourceTree = "<group>"; };
 		D5864977297756CE0081477E /* CheatBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatBaseView.swift; sourceTree = "<group>"; };
@@ -484,6 +491,7 @@
 		D5CDCCC32A85765900E22131 /* OSLog+Delta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Delta.swift"; sourceTree = "<group>"; };
 		D5CDCCEA2A8593FC00E22131 /* UserDefaults+Delta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Delta.swift"; sourceTree = "<group>"; };
 		D5CDCCEC2A859B2B00E22131 /* SyncValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncValidationError.swift; sourceTree = "<group>"; };
+		D5D39E782AF2D624004BE3F7 /* GameView+AirPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameView+AirPlay.swift"; sourceTree = "<group>"; };
 		D5D78AE429F9BC3700E064F0 /* DSAirPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSAirPlay.swift; sourceTree = "<group>"; };
 		D5D78AE629F9D40A00E064F0 /* EnvironmentValues+FeatureOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+FeatureOption.swift"; sourceTree = "<group>"; };
 		D5D797E5298D946200738869 /* Contributor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contributor.swift; sourceTree = "<group>"; };
@@ -566,6 +574,8 @@
 				D5CDCCC32A85765900E22131 /* OSLog+Delta.swift */,
 				D5CDCCEA2A8593FC00E22131 /* UserDefaults+Delta.swift */,
 				AC1AE30B2A6A068F00956EB9 /* Bundle+AppIconImage.swift */,
+				D5D39E782AF2D624004BE3F7 /* GameView+AirPlay.swift */,
+				D55917D72B51CF7D007B7DC0 /* ProcessInfo+visionOS.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -576,6 +586,7 @@
 				BF11734F1DA32CF600047DF8 /* ControllersSettingsViewController.swift */,
 				BF616A121F08184A0077F8B2 /* ControllerInputsViewController.swift */,
 				BF8DDD231F4F6C880088A21B /* InputCalloutView.swift */,
+				D55917D92B51D097007B7DC0 /* LocalDeviceController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -784,6 +795,7 @@
 				BFFA4C081E8A24D600D87934 /* GameTableViewCell.swift */,
 				BF71CF891FE904B1001F1613 /* GameTableViewCell.xib */,
 				BF8A333321A484A000A42FD4 /* BadgedTableViewCell.swift */,
+				D56F7ABB2B05988700490ACB /* AttributedHeaderFooterView.swift */,
 			);
 			path = "Table View";
 			sourceTree = "<group>";
@@ -1547,6 +1559,7 @@
 				BF59427C1E09BC830051894B /* Cheat.swift in Sources */,
 				BFBAB2E31EB685A2004E0B0E /* DeltaCoreProtocol+Delta.swift in Sources */,
 				D5CDCCF22A859E7500E22131 /* RepairDatabaseViewController.swift in Sources */,
+				D55917D82B51CF7D007B7DC0 /* ProcessInfo+visionOS.swift in Sources */,
 				BF3540081C5DAFAD00C1184C /* PauseTransitionCoordinator.swift in Sources */,
 				BF525EEA1FF6CD12004AA849 /* DeepLink.swift in Sources */,
 				AC1C991029F8B8C30020E6E4 /* ToastNotificationOptions.swift in Sources */,
@@ -1660,8 +1673,10 @@
 				BF6866171DCAC8B900BF2D06 /* ControllerSkin+Configuring.swift in Sources */,
 				BF713C0822499ED4004A1A2B /* PreviousHarmony.xcdatamodeld in Sources */,
 				BF59427D1E09BC830051894B /* ControllerSkin.swift in Sources */,
+				D56F7ABC2B05988700490ACB /* AttributedHeaderFooterView.swift in Sources */,
 				BFAB9F7D219A43380080EC7D /* SyncManager.swift in Sources */,
 				BFCEA67E1D56FF640061A534 /* UIViewControllerContextTransitioning+Conveniences.swift in Sources */,
+				D55917DA2B51D097007B7DC0 /* LocalDeviceController.swift in Sources */,
 				BF1173501DA32CF600047DF8 /* ControllersSettingsViewController.swift in Sources */,
 				BFFC461E1D59823500AF2CC6 /* GamesPresentationController.swift in Sources */,
 				BF99A5971DC2F9C400468E9E /* ControllerSkinTableViewCell.swift in Sources */,
@@ -1669,6 +1684,7 @@
 				BF5942861E09BC8B0051894B /* _Cheat.swift in Sources */,
 				BF5E7F441B9A650B00AE44F8 /* SettingsViewController.swift in Sources */,
 				BF8CA9361F5F651900499FDD /* PopoverMenuController.swift in Sources */,
+				D5D39E792AF2D624004BE3F7 /* GameView+AirPlay.swift in Sources */,
 				BFEF24F31F7DD4FD00454C62 /* SaveStateMigrationPolicy.swift in Sources */,
 				BF5942931E09BD1A0051894B /* NSFetchedResultsController+Conveniences.m in Sources */,
 				D5CDCCEE2A859DC200E22131 /* SyncValidationError.swift in Sources */,
@@ -1933,18 +1949,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 85;
 				DEVELOPMENT_TEAM = 6XVY5G3U44;
 				INFOPLIST_FILE = "Delta/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5b4;
-                OTHER_LDFLAGS = (
-                    "-ld64",
-                    "$(inherited)",
-                );
+				MARKETING_VERSION = 1.5;
+				OTHER_LDFLAGS = (
+					"-ld64",
+					"$(inherited)",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rileytestut.Delta;
 				PROVISIONING_PROFILE = "";
@@ -1971,18 +1987,18 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 85;
 				DEVELOPMENT_TEAM = 6XVY5G3U44;
 				INFOPLIST_FILE = "Delta/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5b4;
-                OTHER_LDFLAGS = (
-                    "-ld64",
-                    "$(inherited)",
-                );
+				MARKETING_VERSION = 1.5;
+				OTHER_LDFLAGS = (
+					"-ld64",
+					"$(inherited)",
+				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DIMPACTOR";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rileytestut.Delta;
 				PROVISIONING_PROFILE = "";

@@ -10,7 +10,7 @@ Delta is an iOS application that allows you to emulate and play video games for 
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/705880/115471008-203aa480-a1ec-11eb-8aba-237a46799543.png" width=75%><br/>
-  <em>Mario and Pokémon and properties of Nintendo Co., Ltd. and are not associated with Delta or AltStore LLC.</em>
+  <em>Mario and Pokémon are properties of Nintendo Co., Ltd. and are not associated with Delta or AltStore LLC.</em>
 </p>
 
 ## Supported Systems
@@ -20,7 +20,7 @@ Delta is an iOS application that allows you to emulate and play video games for 
 - Game Boy / Game Boy Color (GBC)
 - Game Boy Advance (GBA)
 - Nintendo DS (DS)
-- Sega Genesis / Mega Drive (GEN) **(in progress)**
+- Sega Genesis / Mega Drive (GEN) **(in beta)**
 
 ## Features
 - Accurate, full speed emulation thanks to mature underlying emulator cores.
@@ -126,12 +126,10 @@ Each system in Delta is implemented as its own "Delta Core", which serves as a s
 - [MelonDSDeltaCore](https://github.com/rileytestut/MelonDSDeltaCore)
 - [GPGXDeltaCore](https://github.com/rileytestut/GPGXDeltaCore)
 
-## Project Requirements
-- Xcode 12
-- Swift 5+
-- iOS 12.2 or later
-
-Why iOS 12.2 or later? Doing so allows me to distribute Delta without embedding Swift libraries inside. This helps me afford bandwidth costs by reducing download sizes by roughly 30%, but also noticeably improves how long it takes to install/refresh Delta with AltStore. If you're compiling Delta yourself, however, you should be able to lower the deployment target to iOS 12.0 without any issues.
+## Minimum Project Requirements
+- Xcode 15
+- Swift 5.9
+- iOS 14.0
 
 ## Compilation Instructions
 
@@ -163,7 +161,7 @@ $ git clone -b develop https://github.com/rileytestut/Delta.git
 ```  
 
 ## Licensing
-Due to the licensing of emulator cores used by Delta, I have no choice but to distribute Delta under the **AGPLv3 license**. That being said, I explicitly give permission for anyone to use, modify, and distribute all *my* original code for this project in any form, with or without attribution, without fear of legal consequences (dependencies remain under their original licenses, however).
+Due to the licensing of emulator cores used by Delta, I have no choice but to distribute Delta under the **AGPLv3 license**. That being said, I explicitly give permission for anyone to use, modify, and distribute all *my* original code for this project in any form, with or without attribution, without fear of legal consequences — unless you plan to submit your app to Apple’s App Store, in which case written permission from me is explicitly required. Dependencies remain under their original licenses.
 
 ## Contact Me
 
