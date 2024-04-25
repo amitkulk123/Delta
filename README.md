@@ -6,7 +6,7 @@ This matters because certain ROMs like lsdj require 128 KiB of memory otherwise 
 
 ## Steps to Build 
 
-Clone this repo and checkout the `develop` branch using
+Clone this repo. You may need to checkout the `develop` branch using but I merged my last change to the `main` branch:
 ```
 git checkout develop
 ```
